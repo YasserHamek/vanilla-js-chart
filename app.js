@@ -1,6 +1,5 @@
 let scoreUrl = "http://cdn.55labs.com/demo/api.json";
 
-/*
 function getData(url) {
     return new Promise(function(resolve, reject) {
         let req = new XMLHttpRequest();
@@ -16,9 +15,9 @@ getData(scoreUrl).then((result) => {
 }).catch((err) => {
     alert('error - ' + err);
 });
-*/
 
-let result = {
+
+let result1 = {
     "data": {
         "DAILY": {
             "dates": [
@@ -333,8 +332,7 @@ let result = {
 
 function createChart(result){
     let refactoredData = dataRefactoring(result);
-
-    console.log(refactoredData);
+    let playersIds = [];
 
     // Adding chart for each year
     for(let dataByYear of refactoredData.data){
@@ -346,68 +344,101 @@ function createChart(result){
         title.className += "year"+dataByYear.year;
         title.innerHTML += "Displaying players scores for year " + dataByYear.year;
         title.style.fontSize = "25px";
-        
-
-        for(dataByMonth of dataByYear.data){
-            console.log(dataByMonth);
-        }
 
         // Adding chart for each month
         for(dataByMonth of dataByYear.data){
             document.getElementById("container").innerHTML += `
-            <div class="chart-container">
+            <div id="chart-container" class="chart-container">
                 <div class="y-axis-label">
                     <div>1000</div>
                     <div>750</div>
                     <div>250</div>
                     <div>0</div>
                 </div>
-                <div class="chart">
-            `;
-            
-            // Adding chart bar for each day
-            for (let dataByDay of dataByMonth.dateAndPlayers){
-                document.getElementById("container").innerHTML += `
-                <div class="bar-wrapper">
-                    <div class="bar-per-date">
-                `;
-
-                
-
-                // closing div
-                document.getElementById("container").innerHTML += `
-                    </div>
-                </div>
-        `;
-
-            }
-    
-            // Closing chart AND chart-container
-            document.getElementById("container").innerHTML += `
+                <div id="chart" class="chart">
                 </div>
             </div>
             `;
+
+            let chartContainer = document.getElementById("chart-container");
+            chartContainer.id += "-"+dataByMonth.month+"-"+dataByYear.year;
+            
+            let chart = document.getElementById("chart");
+            chart.id += "-"+dataByMonth.month+"-"+dataByYear.year;
+
+            // Adding chart bar for each day
+            for (let dataByDay of dataByMonth.dateAndPlayers){
+                document.getElementById(chart.id).innerHTML += `
+                <div id="bar-wrapper" class="bar-wrapper">
+                    <div id="bar-per-date" class="bar-per-date">
+                    </div>
+                </div>
+                `;
+
+                let barPerDate = document.getElementById("bar-per-date");
+                barPerDate.id += "-"+dataByDay.date;
+
+                let barWrapper = document.getElementById("bar-wrapper");
+                barWrapper.id += "-"+dataByDay.date;
+
+                // Adding bar for each player
+                let playerNumber = 1;
+                let index = 0;
+                for(let scoreByPlayer of dataByDay.playersScore){
+                    
+                    document.getElementById(barPerDate.id).innerHTML += `
+                    <div class="bar-container">
+                        <div id="player-num" class="hide-div">
+                        </div>
+                        <div id="player" class="bar">
+                        </div>
+                    </div>
+                    `;
+                    let playerNumDiv =  document.getElementById("player-num");
+
+                    playerNumDiv.id = "player-"+playerNumber+"-"+dataByDay.date+"-num";
+                    
+                    let playerScore;
+                    for (let playerName in scoreByPlayer) {
+                        playerScore = scoreByPlayer[playerName];
+                    }
+                    
+                    playerNumDiv.innerHTML += playerScore;
+
+                    let playerDiv =  document.getElementById("player");
+                    playerDiv.id += "-"+playerNumber+"-"+dataByDay.date;
+                    
+
+
+                    let playerHeight = getHeight(playerScore);
+                    playerDiv.style.height = playerHeight;
+                    playerDiv.classList.add("player-"+playerNumber)
+
+                    playersIds.push(playerDiv.id);
+
+                    playerNumber++;
+                }
+
+                document.getElementById(barWrapper.id).innerHTML += `
+                    <div id="date">
+                    </div>
+                `;
+
+                let dateDiv =  document.getElementById("date");
+                dateDiv.id = dataByDay.date;
+                dateDiv.innerHTML += dataByDay.date.substring(6,8);
+
+            }
         }
-
-
     }
 
+    for(let playerId of playersIds){
+        addClickHandler(playerId);
+    }
 
-    let barId = "player-1-20160901";
-    document.addEventListener("DOMContentLoaded", function(event) { 
-        document.getElementById(barId).addEventListener('click', () => {
-            if(isToAddClass(barId)){
-                document.getElementById(barId).classList.add("clicked-bar");
-                document.getElementById(barId+"-num").classList.remove("hide-div");
-            } else {
-                document.getElementById(barId).classList.remove("clicked-bar");
-                document.getElementById(barId+"-num").classList.add("hide-div");
-            }
-        });
-    });
 }
 
-createChart(result);
+//createChart(result1);
 
 function dataRefactoring(result){
     let years = result?.data?.DAILY?.dates.map(
@@ -484,7 +515,7 @@ function getDateAndPlayers(dateOfCurrentMonth, players, index){
         if(date != null){
             dateAndPlayers.push({
                 "date": date,
-                "PlayersScore" : getPlayerScoreByDate(localIndex, players)
+                "playersScore" : getPlayerScoreByDate(localIndex, players)
             });
         }
         localIndex++;
@@ -529,6 +560,21 @@ function isToAddClass(barId) {
     return isToAddClass;
 }
 
+function addClickHandler(barId){
+    document.getElementById(barId).addEventListener('click', () => {
+        if(isToAddClass(barId)){
+            document.getElementById(barId).classList.add("clicked-bar");
+            document.getElementById(barId+"-num").classList.remove("hide-div");
+        } else {
+            document.getElementById(barId).classList.remove("clicked-bar");
+            document.getElementById(barId+"-num").classList.add("hide-div");
+        }
+    });
+}
+
+function getHeight(score){
+    return ((score*200)/1000)+"px";
+}
 
 let dataModel = [];
 dataModel.push({
@@ -547,7 +593,7 @@ dataModel.push({
         },
         {
             "date" : "20160902",
-            "PlayersScore" : [
+            "playersScore" : [
                 {
                     "john" : 600,
                 },
