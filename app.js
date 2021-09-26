@@ -1,5 +1,6 @@
 let scoreUrl = "http://cdn.55labs.com/demo/api.json";
 
+/*
 function getData(url) {
     return new Promise(function(resolve, reject) {
         let req = new XMLHttpRequest();
@@ -11,10 +12,11 @@ function getData(url) {
 }
 
 getData(scoreUrl).then((result) => {
-    //createChart(JSON.parse(result));
+    createChart(JSON.parse(result));
 }).catch((err) => {
     alert('error - ' + err);
 });
+*/
 
 let result = {
     "data": {
@@ -321,7 +323,7 @@ let result = {
                 "firstname": "Larry",
                 "lastname": "Loe"
             },
-            "larry": {
+            "smith": {
                 "firstname": "smith",
                 "lastname": "jordan"
             }
@@ -330,18 +332,14 @@ let result = {
 }
 
 function createChart(result){
-    let data = dataRefactoring(result);
-    console.log("**** this is data ****");
-    console.log(result);
-    console.log("**** this is data end ****");
-    console.log("**** this is refactored data ****");
-    console.log(data);
-    console.log("**** this is refactored data end ****");
-    /*for(let i=0; i<data; i++){
-        document.getElementById("container").innerHTML += `
+    let refactoredData = dataRefactoring(result);
+
+    for(let dataByYear of refactoredData.data){
+
+        /*document.getElementById("container").innerHTML += `
             div
-        `
-    }*/
+        `*/
+    }
 }
 
 createChart(result);
@@ -380,7 +378,12 @@ function dataRefactoring(result){
             "data" : dataRefactoringByYear(resultPerYear)
         })   
     }
-    return dataRefactored;
+
+    let dataToBeReturned = {
+        "data": dataRefactored,
+        "settings": result?.settings 
+    }
+    return dataToBeReturned;
 }
 
 function dataRefactoringByYear(result) {
