@@ -10,14 +10,17 @@
     display: flex;
     flex-direction: row;
     align-items: flex-start;
+    padding: 20px;
+    background-color: #DDDDDD;
+    border-radius: 15px;
 }
 
 .y-axis-label {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    gap: 33px;
-    height: 151px;
+    gap: 49px;
+    height: 201px;
     padding-right: 2px;
     border-right: 1px solid black;
     font-size: 13px;
@@ -54,15 +57,13 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    background-color: chartreuse;
-    width: 10px;
-    height: 150px;
+    align-items: center;
+    width: 12px;
+    height: 200px;
 }
 
 .bar {
-    background-color: brown;
     width: 100%;
-    height: 90%;
 }
 
 .chart-info {
@@ -70,9 +71,72 @@
     flex-direction: column;
     font-size: 13px;
     height: 150px;
-    width: 10px;
-    background-color: darkcyan;
+    margin-top: 15px;
+    margin-left: 15px;
+    gap: 5px;
 }
 
+.player-informations {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    margin-left: 10px;
+}
+
+.dot {
+    border-radius: 4px;
+    height: 8px;
+    width: 8px;
+}
+
+.clicked-bar {
+    border: 2px solid black;
+}
+
+.hide-div {
+    visibility: hidden;
+}
+
+.player-1 {
+    background-color: #0074D9;
+}
+
+.player-2 {
+    background-color: #2ECC40 ;
+}
+
+.player-3 {
+    background-color: #F012BE;
+}
+
+.player-4 {
+    background-color: #85144b;
+}
+
+.player-5 {
+    background-color: #B10DC9;
+}
+
+.player-6 {
+    background-color: #FF4136;
+}
+
+.player-7 {
+    background-color: #FF851B;
+}
+
+.player-8 {
+    background-color: #3D9970;
+}
+
+.player-9 {
+    background-color: #39CCCC;
+}
+
+.player-10 {
+    background-color: #FFDC00;
+}
 
 /* height and backgroundColor must be added dynamically */

@@ -334,12 +334,77 @@ let result = {
 function createChart(result){
     let refactoredData = dataRefactoring(result);
 
-    for(let dataByYear of refactoredData.data){
+    console.log(refactoredData);
 
-        /*document.getElementById("container").innerHTML += `
-            div
-        `*/
+    // Adding chart for each year
+    for(let dataByYear of refactoredData.data){
+        //adding titles
+        document.getElementById("container").innerHTML += `
+        <div class="title">  </div>
+        `;
+        let title = document.querySelector(".title");
+        title.className += "year"+dataByYear.year;
+        title.innerHTML += "Displaying players scores for year " + dataByYear.year;
+        title.style.fontSize = "25px";
+        
+
+        for(dataByMonth of dataByYear.data){
+            console.log(dataByMonth);
+        }
+
+        // Adding chart for each month
+        for(dataByMonth of dataByYear.data){
+            document.getElementById("container").innerHTML += `
+            <div class="chart-container">
+                <div class="y-axis-label">
+                    <div>1000</div>
+                    <div>750</div>
+                    <div>250</div>
+                    <div>0</div>
+                </div>
+                <div class="chart">
+            `;
+            
+            // Adding chart bar for each day
+            for (let dataByDay of dataByMonth.dateAndPlayers){
+                document.getElementById("container").innerHTML += `
+                <div class="bar-wrapper">
+                    <div class="bar-per-date">
+                `;
+
+                
+
+                // closing div
+                document.getElementById("container").innerHTML += `
+                    </div>
+                </div>
+        `;
+
+            }
+    
+            // Closing chart AND chart-container
+            document.getElementById("container").innerHTML += `
+                </div>
+            </div>
+            `;
+        }
+
+
     }
+
+
+    let barId = "player-1-20160901";
+    document.addEventListener("DOMContentLoaded", function(event) { 
+        document.getElementById(barId).addEventListener('click', () => {
+            if(isToAddClass(barId)){
+                document.getElementById(barId).classList.add("clicked-bar");
+                document.getElementById(barId+"-num").classList.remove("hide-div");
+            } else {
+                document.getElementById(barId).classList.remove("clicked-bar");
+                document.getElementById(barId+"-num").classList.add("hide-div");
+            }
+        });
+    });
 }
 
 createChart(result);
@@ -440,6 +505,29 @@ function getPlayerScoreByDate(index, players){
 
     return playerScore;
 }  
+
+var clickTable = [];
+function isToAddClass(barId) {
+    let indexOfTheBar = clickTable.findIndex((value) => value.barId === barId);
+    let isToAddClass;
+    
+    if (indexOfTheBar === -1){
+        clickTable.push({
+            "barId" : barId,
+            "clicked" : false
+        });
+        indexOfTheBar = clickTable.findIndex((value) => value.barId === barId);
+    } 
+
+    if(clickTable[indexOfTheBar].clicked){
+        isToAddClass = false;
+    } else {
+        isToAddClass = true;
+    }
+    clickTable[indexOfTheBar].clicked = !clickTable[indexOfTheBar].clicked;
+
+    return isToAddClass;
+}
 
 
 let dataModel = [];
