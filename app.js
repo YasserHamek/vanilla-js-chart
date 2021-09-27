@@ -12,323 +12,11 @@ function getData(url) {
 
 getData(scoreUrl).then((result) => {
     createChart(JSON.parse(result));
+    console.log("***************");
+    console.log(result)
 }).catch((err) => {
     alert('error - ' + err);
 });
-
-
-let result1 = {
-    "data": {
-        "DAILY": {
-            "dates": [
-                "20160901",
-                "20160902",
-                "20160903",
-                null,
-                "20160905",
-                "20160906",
-                null,
-                "20160908",
-                "20160909",
-                "20160910",
-                "20160911",
-                "20160912",
-                "20160913",
-                "20160914",
-                "20160915",
-                "20160916",
-                "20160917",
-                "20160918",
-                "20160919",
-                "20160920",
-                "20160921",
-                "20160922",
-                "20160923",
-                "20160924",
-                "20160925",
-                null,
-                "20160927",
-                "20160928",
-                "20160929",
-                "20160930",
-
-                "20161008",
-                "20161009",
-                "20161010",
-                "20161011",
-                "20161012",
-                "20161013",
-                "20161014",
-                "20161015",
-                "20161016",
-                "20161017",
-                "20161018",
-                "20161019",
-                "20161020",
-                "20161021",
-
-                "20161122",
-                "20161123",
-                "20161124",
-                "20161125",
-                null,
-                "20161127",
-                "20161128",
-
-                "20161229",
-                "20161230",
-                "20161201",
-                "20161202",
-
-                
-
-                "20171122",
-                "20171123",
-                "20171124",
-                "20171125",
-                null,
-                "20171127",
-                "20171128",
-
-                "20181229",
-                "20181230",
-                "20181201",
-                "20181202"
-            ],
-            "dataByMember": {
-                "players": {
-                    "john": {
-                        "points": [
-                            591,
-                            440,
-                            728,
-                            null,
-                            937,
-                            706,
-                            null,
-                            628,
-                            429,
-                            254,
-                            601,
-                            444,
-                            179,
-                            572,
-                            131,
-                            267,
-                            886,
-                            343,
-                            432,
-                            583,
-                            351,
-                            794,
-                            400,
-                            996,
-                            948,
-                            null,
-                            307,
-                            886,
-                            821,
-                            994,
-                            706,
-                            null,
-                            628,
-                            429,
-                            254,
-                            601,
-                            444,
-                            179,
-                            572,
-                            131,
-                            267,
-                            886,
-                            343,
-                            432,
-                            583,
-                            351,
-                            794,
-                            400,
-                            996,
-                            948,
-                            null,
-                            307,
-                            886,
-                            821,
-                            994,
-                            583,
-                            351,
-                            794,
-                            400,
-                            996,
-                            948,
-                            null,
-                            307,
-                            886,
-                            821,
-                            994
-                        ]
-                    },
-                    "larry": {
-                        "points": [
-                            263,
-                            656,
-                            683,
-                            null,
-                            824,
-                            361,
-                            null,
-                            802,
-                            101,
-                            867,
-                            694,
-                            843,
-                            488,
-                            622,
-                            309,
-                            486,
-                            236,
-                            774,
-                            807,
-                            577,
-                            680,
-                            949,
-                            685,
-                            122,
-                            208,
-                            null,
-                            152,
-                            453,
-                            955,
-                            782,
-                            706,
-                            null,
-                            628,
-                            429,
-                            254,
-                            601,
-                            444,
-                            179,
-                            572,
-                            131,
-                            267,
-                            886,
-                            343,
-                            432,
-                            583,
-                            351,
-                            794,
-                            400,
-                            996,
-                            948,
-                            null,
-                            307,
-                            886,
-                            821,
-                            994,
-                            583,
-                            351,
-                            794,
-                            400,
-                            996,
-                            948,
-                            null,
-                            307,
-                            886,
-                            821,
-                            994
-                        ]
-                    },
-                    "smith": {
-                        "points": [
-                            263,
-                            656,
-                            683,
-                            null,
-                            824,
-                            361,
-                            null,
-                            802,
-                            101,
-                            867,
-                            694,
-                            843,
-                            488,
-                            622,
-                            309,
-                            486,
-                            236,
-                            774,
-                            807,
-                            577,
-                            680,
-                            949,
-                            685,
-                            122,
-                            208,
-                            null,
-                            152,
-                            453,
-                            955,
-                            782,
-                            706,
-                            null,
-                            628,
-                            429,
-                            254,
-                            601,
-                            444,
-                            179,
-                            572,
-                            131,
-                            267,
-                            886,
-                            343,
-                            432,
-                            583,
-                            351,
-                            794,
-                            400,
-                            996,
-                            948,
-                            null,
-                            307,
-                            886,
-                            821,
-                            994,
-                            583,
-                            351,
-                            794,
-                            400,
-                            996,
-                            948,
-                            null,
-                            307,
-                            886,
-                            821,
-                            994
-                        ]
-                    }
-                }
-            }
-        }
-    },
-    "settings": {
-        "label": "Online Playing Platform",
-        "dictionary": {
-            "john": {
-                "firstname": "John",
-                "lastname": "Smith"
-            },
-            "larry": {
-                "firstname": "Larry",
-                "lastname": "Loe"
-            },
-            "smith": {
-                "firstname": "smith",
-                "lastname": "jordan"
-            }
-        }
-    }
-}
 
 function createChart(result){
     let refactoredData = dataRefactoring(result);
@@ -351,8 +39,10 @@ function createChart(result){
             <div id="chart-container" class="chart-container">
                 <div class="y-axis-label">
                     <div>1000</div>
-                    <div>750</div>
-                    <div>250</div>
+                    <div>800</div>
+                    <div>600</div>
+                    <div>400</div>
+                    <div>200</div>
                     <div>0</div>
                 </div>
                 <div id="chart" class="chart">
@@ -368,7 +58,7 @@ function createChart(result){
 
             // Adding chart bar for each day
             for (let dataByDay of dataByMonth.dateAndPlayers){
-                document.getElementById(chart.id).innerHTML += `
+                chart.innerHTML += `
                 <div id="bar-wrapper" class="bar-wrapper">
                     <div id="bar-per-date" class="bar-per-date">
                     </div>
@@ -419,7 +109,7 @@ function createChart(result){
                     playerNumber++;
                 }
 
-                document.getElementById(barWrapper.id).innerHTML += `
+                barWrapper.innerHTML += `
                     <div id="date">
                     </div>
                 `;
@@ -429,6 +119,55 @@ function createChart(result){
                 dateDiv.innerHTML += dataByDay.date.substring(6,8);
 
             }
+
+            chartContainer.innerHTML += `
+                <div id="chart-info" class="chart-info">
+                    <div id="month">
+                    </div>
+                    <div id="players-title">
+                    </div>
+                </div>
+                `;
+            
+            let chartInfo = document.getElementById('chart-info');
+            chartInfo.id += "-"+dataByMonth.month+"-"+dataByYear.year;
+
+            let month = document.getElementById('month');
+            month.id += "-"+dataByMonth.month+"-"+dataByYear.year;
+
+            let playersTitle = document.getElementById('players-title');
+            playersTitle.id += "-"+dataByMonth.month+"-"+dataByYear.year;
+
+            month.innerHTML += "Month : "+dataByMonth.month;
+            playersTitle.innerHTML += "Players :";
+
+            let indexPlayer = 1;
+            for(let player in refactoredData.settings.dictionary){
+                chartInfo.innerHTML += `
+                <div id="player-information" class="player-informations">
+                    <div id="player-dot" class="dot">
+
+                    </div>
+                    <div id="player-name">
+                        
+                    </div>
+                </div>
+                `;
+
+                let playerInformation = document.getElementById("player-information");
+                playerInformation.id += "-"+player+"-"+dataByMonth.month+"-"+dataByYear.year;
+
+                let playerDot = document.getElementById("player-dot");
+                playerDot.id += "-"+player+"-"+dataByMonth.month+"-"+dataByYear.year;
+
+                let playerName = document.getElementById("player-name");
+                playerName.id += "-"+player+"-"+dataByMonth.month+"-"+dataByYear.year;
+
+                playerDot.classList.add("player-"+indexPlayer);
+                playerName.innerHTML += player;
+                indexPlayer++;
+            }
+
         }
     }
 
@@ -437,8 +176,6 @@ function createChart(result){
     }
 
 }
-
-//createChart(result1);
 
 function dataRefactoring(result){
     let years = result?.data?.DAILY?.dates.map(
