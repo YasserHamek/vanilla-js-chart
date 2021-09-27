@@ -12,8 +12,6 @@ function getData(url) {
 
 getData(scoreUrl).then((result) => {
     createChart(JSON.parse(result));
-    console.log("***************");
-    console.log(result)
 }).catch((err) => {
     alert('error - ' + err);
 });
